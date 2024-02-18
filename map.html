@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Tutorial</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
+
+    <style>
+        #map {
+            width: 100%;
+            height: 90vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map">
+
+    </div>
+    <button onclick="toggle()">Play/Pause</button>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <script>
+        var map = L.map('map').setView([12.99, 80.21], 13);
+        var stop = false;
+        var marker;
+        var start = [13.0805, 80.1971];
+		var ind=0;
+
+		function movefuther(){
+			L.Routing.control({
+            waypoints: [L.latLng(start[0], start[1]), L.latLng(12.9921, 80.2172)],
+			
+			
+        }).on('routesfound', function (e) {
+            const abc = setInterval(function(){
+				marker.setLatLng([e.routes[0].coordinates[ind].lat,e.routes[0].coordinates[ind].lng])
+				ind=ind+1;
+				if(stop==true){
+					clearInterval(abc)
+				}
+			}, 100);
+        }).addTo(map);
+		}
+		function toggle(){
+			stop=!stop;
+			if(stop==false){
+				movefuther()
+			}
+		}
+
+
+
+     
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        marker = L.marker(start).addTo(map);
+
+        L.Routing.control({
+            waypoints: [L.latLng(start[0], start[1]), L.latLng(12.9921, 80.2172)],
+        }).on('routesfound', function (e) {
+            const abc = setInterval(function(){
+				marker.setLatLng([e.routes[0].coordinates[ind].lat,e.routes[0].coordinates[ind].lng])
+				ind=ind+1;
+				if(stop==true){
+					clearInterval(abc)
+				}
+			}, 100);
+        }).addTo(map);
+
+        
+    </script>
+</body>
+
+</html>

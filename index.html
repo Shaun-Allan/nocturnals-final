@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>
+        CAR SIMULATOR
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<div class="fullah">
+    <div class="input">
+        <div class="onuona">
+            <div class="input-group mb-3">
+                <input type="number" id="speed" class="form-control input-inputs" placeholder="Car's speed" aria-label="Car's speed" aria-describedby="basic-addon2">
+                <span class="input-group-text" id="basic-addon2">km/h</span>
+            </div>
+            <button type="button" class="btn btn-primary" id="btn1">Click</button>
+        </div>
+
+        <div class="onuona">
+            <div class="input-group mb-3">
+
+                <input type="number" id="odotext" class="form-control input-inputs" placeholder="Car's Initial Distance" aria-label="Car's Initial Distance" aria-describedby="basic-addon2">
+                <span class="input-group-text" id="basic-addon2">km</span>
+            </div>
+            <button type="button" class="btn btn-primary" id="odobtn">Click</button>
+        </div>
+
+        <div class="onuona">
+            <div class="input-group mb-3">
+
+                <input type="number" id="fuel" class="form-control input-inputs" placeholder="Car's Fuel" aria-label="Car's Fuel" aria-describedby="basic-addon2">
+                <span class="input-group-text" id="basic-addon2">litres</span>
+            </div>
+            <button type="button" class="btn btn-primary" id="fuelbtn">Click</button>
+        </div>
+
+        <div class="onuona">
+            <div class="input-group mb-3">
+
+                <input type="number" id="fuelmax" class="form-control input-inputs" placeholder="Car's Max Fuel Capacity" aria-label="Car's Max Fuel Capacity" aria-describedby="basic-addon2">
+                <span class="input-group-text" id="basic-addon2">litres</span>
+            </div>
+            <button type="button" class="btn btn-primary" id="fuelmaxbtn">Click</button>
+        </div>
+
+        <div class="onuona">
+            <div class="input-group mb-3">
+
+                <input type="number" id="mileage" class="form-control input-inputs" placeholder="Car's Mileage" aria-label="Car's Mileage" aria-describedby="basic-addon2">
+                <span class="input-group-text" id="basic-addon2">km/litre</span>
+            </div>
+            <button type="button" class="btn btn-primary" id="mileagebtn">Click</button>
+        </div>
+
+        <div class="onuona" id="onuonaseatbelt">
+            <button type="button" class="btn btn-primary" id="seatbeltbtn">Seatbelt</button>
+        </div>
+    </div>
+
+    <div class="output">
+        <div>
+            ACCELERATION :  <span id="acceltext">0</span>
+
+        </div>
+        <div>
+            SPEED :  <span id="speedtxt">0</span>
+
+        </div>
+        <div>
+            ODOMETER :  <span id="odoouttext">0</span>
+
+        </div>
+        <div>
+            DISTANCE TRAVELLED IN THIS INTERVAL :  <span id="distancetravel">0</span>
+
+        </div>
+        <div>
+            FUEL :  <span id="fueltxt">0</span>
+
+        </div>
+        <div>
+            FUEL LEVEL :  <span id="fuellvltxt">0</span>
+
+        </div>
+
+        <div>
+            ESTIMATED DISTANCE WITH EXISTING FUEL :  <span id="distexp">0   </span>
+
+        </div>
+        <div>
+            <span id="seatbeltexp"></span>
+        </div>
+        <div class="outputIntervals">
+            <input type="number" id="accInterval" class="form-control output-interval" placeholder="Acceleration Interval">
+            <input type="number" id="speedInterval" class="form-control output-interval" placeholder="Speed Interval">
+            <input type="number" id="odoInterval" class="form-control output-interval" placeholder="Odometer Interval">
+            <input type="number" id="distInterval" class="form-control output-interval" placeholder="Distance Interval">
+            <input type="number" id="fuelInterval" class="form-control output-interval" placeholder="Fuel Interval">
+            <input type="number" id="fuelLvlInterval" class="form-control output-interval" placeholder="Fuel LVL Interval">
+            <input type="number" id="existInterval" class="form-control output-interval" placeholder="Dist with existing fuel Interval">
+            <button type="button" class="btn btn-primary" id="intervalBtn">Set Intervals</button>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    const txt1=document.getElementById("speed")
+    const btn1 = document.getElementById("btn1")
+    const seatbeltbtn = document.getElementById("seatbeltbtn")
+    const fuelinp=document.getElementById("fuel")
+    const fuelbutt=document.getElementById("fuelbtn")
+    const fuelmaxinp = document.getElementById("fuelmax")
+    const fuelmaxbutt=document.getElementById("fuelmaxbtn")
+    const mileageinp = document.getElementById('mileage')
+    const mileagebtn=document.getElementById('mileagebtn')
+    const acceltext=document.getElementById("acceltext")
+    const speedtext=document.getElementById("speedtxt")
+    const odotext = document.getElementById("odotext")
+    const odobtn = document.getElementById("odobtn")
+    const odoouttxt=document.getElementById("odoouttext")
+    const distttext=document.getElementById("distancetravel")
+    const fueltxt=document.getElementById("fueltxt")
+    const fuellvltxt=document.getElementById("fuellvltxt")
+    const distexp=document.getElementById("distexp")
+    const seatbelttxt = document.getElementById("seatbeltexp")
+
+    const accInterval = document.getElementById("accInterval")
+    const speedInterval = document.getElementById("speedInterval")
+    const odoInterval = document.getElementById("odoInterval")
+    const distInterval = document.getElementById("distInterval")
+    const fuelInterval = document.getElementById("fuelInterval")
+    const fuelLvlInterval = document.getElementById("fuelLvlInterval")
+    const existInterval = document.getElementById("existInterval")
+    const intervalBtn = document.getElementById("intervalBtn")
+
+    var oldspeed=0;
+    var newspeed=0;
+    var distance=0;
+    var seatbelt = true;
+    var mileage=0;
+    var fuelmax=0;
+    var fuell=0;
+    var odo=0;
+    var accIntervalVal =  0
+    var speedIntervalVal =0
+    var odoIntervalVal = 0
+    var distIntervalVal =0
+    var fuelIntervalVal = 0
+    var fuelLvlIntervalVal = 0
+    var existIntervalVal = 0
+
+
+
+    function fun(){
+        newspeed = Number(txt1.value)
+
+    }
+    function seatbeltf(){
+        seatbelt=!seatbelt;
+    }
+
+    function calcfuel(){
+        if(fuell+Number(fuelinp.value)>fuelmax) {
+            fuell = fuelmax
+        }
+        else{
+            fuell=fuell+Number(fuelinp.value)
+        }
+    }
+    function fuelmaxfun(){
+        fuelmax=Number(fuelmaxinp.value)
+    }
+
+    function mileagefun(){
+        mileage=Number(mileageinp.value)
+    }
+
+    function odofun(){
+        odo=Number(odotext.value)
+    }
+
+    btn1.addEventListener('click',fun)
+    seatbeltbtn.addEventListener('click',seatbeltf)
+    fuelbutt.addEventListener('click',calcfuel)
+    fuelmaxbutt.addEventListener('click',fuelmaxfun)
+    mileagebtn.addEventListener('click',mileagefun)
+    odobtn.addEventListener('click',odofun)
+    intervalBtn.addEventListener('clicl', setInterval)
+
+
+    setInterval(()=>{
+        if(fuell>0){
+            acceltext.innerText = Number((newspeed - oldspeed) / 5)
+
+            speedtext.innerText=newspeed
+        }
+
+        oldspeed=newspeed;
+    },5000)
+
+    setInterval(()=>{
+        odo=odo+((newspeed*10)/3600)
+        odoouttxt.innerText=odo;
+        distttext.innerText=((newspeed*10)/3600)
+        distance=(newspeed*10)/3600
+        console.log("total distance",distance)
+
+
+    },10000)
+    setInterval(()=>{
+
+        if(seatbelt==false && newspeed!=0){
+            seatbelttxt.innerText='SEATBELT NOT WORN!'
+        }
+        else
+        {
+            seatbelttxt.innerText=' ';
+        }
+    },1000)
+
+    setInterval(()=>{
+        console.log("fuel",fuell)
+        console.log('fuelmax',fuelmax)
+    },7500)
+
+
+    setInterval(()=>{
+        if (mileage!=0 && newspeed!=0){
+            fuell = fuell - (distance / mileage)
+        }
+        if (fuell<=0){
+            fuell=0;
+            newspeed=0;
+
+        }
+        fueltxt.innerText=fuell
+        fuellvltxt.innerText=(fuell/fuelmax)*100+"%"
+        distexp.innerText=(fuell*mileage)
+    },10000)
+
+
+</script>
+</html>
